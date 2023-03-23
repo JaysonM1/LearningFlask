@@ -8,6 +8,7 @@ blp = Blueprint("stores", __name__, description = "Operations on stores")
 
 @blp.route("/store/<string:store_id>")
 class Store(MethodView):
+    @blp.response(201, StoreSchema)
     def get(self, store_id):
         try:
             return stores[store_id]
@@ -25,11 +26,13 @@ class Store(MethodView):
 
 @blp.route("/store")
 class StoreList(MethodView):
+    @blp.response(200, StoreSchema(many = True))
     def get(self):
         return list(stores.values())
     
 
     @blp.arguments(StoreSchema)
+    @blp.response(200, StoreSchema)
     def post(self, store_data):
         if "name" not in store_data:
             abort(400, message = "Bad request. Ensure name is in JSON payload")
