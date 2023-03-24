@@ -2,7 +2,6 @@ import uuid
 from flask import request 
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from db import items,stores
 from schemas import ItemSchema, ItemUpdateSchema
 
 blp = Blueprint("Items", __name__, description = "Operations on items")
@@ -10,7 +9,7 @@ blp = Blueprint("Items", __name__, description = "Operations on items")
 @blp.route("/item")
 class Item(MethodView):
 
-    @blp.response(200, ItemSchema = 200)
+    @blp.response(200, ItemSchema)
     def get(self):
         return items.values()
     
