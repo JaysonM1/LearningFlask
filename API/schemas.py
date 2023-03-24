@@ -5,6 +5,7 @@ class PlainItemSchema(Schema):
     id = fields.Str(dump_only = True)
     name = fields.Str(required = True)
     price = fields.Float(required = True)
+    
 class ItemSchema(PlainItemSchema):
     store_id = fields.Str(required = True)
     store = fields.Nested(PlainItemSchema(), dump_only = True)
