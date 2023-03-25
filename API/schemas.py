@@ -14,6 +14,7 @@ class ItemSchema(PlainItemSchema):
 class ItemUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Str()
+    store_id = fields.Int()
 
     
 
