@@ -13,7 +13,7 @@ class Item(MethodView):
 
     @blp.response(200, ItemSchema)
     def get(self):
-        return items.values()
+        return ItemModel.query,all()
     
 
     @blp.arguments(ItemSchema)
