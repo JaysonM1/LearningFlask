@@ -21,7 +21,7 @@ class Store(MethodView):
         store = StoreModel.query.get_or_404(store_id)
         db.session.delete(store)
         db.session.commit()
-        return {"message": "Item deleted."}
+        return {"message": "Store deleted."}
 
 
 @blp.route("/store")
@@ -43,11 +43,3 @@ class StoreList(MethodView):
             abort(400, message = "Integrity error")
         except SQLAlchemyError:
             abort(500, message = "An error occured while creating the store")
-
-@blp.route("/store/<string:store_id>/item")
-class StoreItems(MethodView):
-    def get(self, store_id):
-        for store in stores:
-            if store["name"] == store_id:
-                return {"items": store["items"]}
-            abort(404, message = "Store not found.")
