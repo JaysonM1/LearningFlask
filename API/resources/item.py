@@ -34,23 +34,15 @@ class Item(MethodView):
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):
-        try: 
-            return items[item_id]
-        except:
-            abort(404, message = "Item not found.")
+        item = ItemModel.query.get_or_404(item_id)
+        return item
 
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemUpdateSchema)
     def put(self, item_id, item_data):
-        try:
-            item = items[item_id]
-            item |= item_data
-        except KeyError:
-            abort(404, message = "Item not found")
+        item = ItemModel.query.get_or_404(item_id)
+        raise NotImplementedError("Updating an item is not implemented")
     
     def delete(self, item_id):
-        try: 
-            del items[item_id]
-            return {"message": "Item Deleted"}
-        except:
-            abort(404, message = "Item not found.")
+        item = ItemModel.query.get_or_404(item_id)
+        raise NotImplementedError("Deleting an item is not implemented")
